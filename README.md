@@ -1,1 +1,0 @@
-# Tiko_Challenge
