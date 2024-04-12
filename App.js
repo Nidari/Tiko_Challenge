@@ -13,7 +13,6 @@ const App = () => {
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
         <Stack.Screen name="Signup" component={Signup} options={{headerShown: false}} />
-        <Stack.Screen name="Registration" component={Registration} options={{headerShown: false}} />
         <Stack.Screen name="TodoList" component={TodoListScreen} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
