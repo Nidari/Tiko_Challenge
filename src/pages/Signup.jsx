@@ -47,7 +47,7 @@ const Signup = ({ navigation }) => {
             last_name: lastName,
         };
 
-        console.log('Registration Data:', JSON.stringify(userData));
+
 
         setIsLoading(true);
 

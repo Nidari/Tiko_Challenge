@@ -66,8 +66,26 @@ const TodoListScreen = ({ navigation }) => {
             const isTokenValid = await checkTokenValidity(accessToken);
 
             if (!isTokenValid) {
-                Alert.alert('Error', "Session Expired please Login again", [{ text: 'OK', onPress: () => handleLogout() }]);
-                return;
+                const userData = {
+                    refresh: refreshToken
+                }
+                try {
+                    const refreshResponse = await fetch(baseUrl + 'token/refresh/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    });
+
+                    const data = await refreshResponse.json();
+                    await SecureStore.setItemAsync('accessToken', data.access.toString());
+
+                } catch (error) {
+                    Alert.alert('Error', "Session Expired please Login again", [{ text: 'OK', onPress: () => handleLogout() }]);
+                    return;
+                }
+
             }
 
             if (todoDescription === "") {
@@ -107,8 +125,6 @@ const TodoListScreen = ({ navigation }) => {
     const updateTodo = async (inputId, inputNewDescription, inputNewDone) => {
 
         setIsLoading(true);
-        console.log("INPUT ", inputNewDone)
-
 
         try {
             if (!accessToken) {
@@ -118,8 +134,26 @@ const TodoListScreen = ({ navigation }) => {
             const isTokenValid = await checkTokenValidity(accessToken);
 
             if (!isTokenValid) {
-                Alert.alert('Error', "Session Expired please Login again", [{ text: 'OK', onPress: () => handleLogout() }]);
-                return;
+                const userData = {
+                    refresh: refreshToken
+                }
+                try {
+                    const refreshResponse = await fetch(baseUrl + 'token/refresh/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    });
+
+                    const data = await refreshResponse.json();
+                    await SecureStore.setItemAsync('accessToken', data.access.toString());
+
+                } catch (error) {
+                    Alert.alert('Error', "Session Expired please Login again", [{ text: 'OK', onPress: () => handleLogout() }]);
+                    return;
+                }
+
             }
 
             const updatedTodoData = {
@@ -165,8 +199,26 @@ const TodoListScreen = ({ navigation }) => {
             const isTokenValid = await checkTokenValidity(accessToken);
 
             if (!isTokenValid) {
-                Alert.alert('Error', "Session Expired please Login again", [{ text: 'OK', onPress: () => handleLogout() }]);
-                return;
+                const userData = {
+                    refresh: refreshToken
+                }
+                try {
+                    const refreshResponse = await fetch(baseUrl + 'token/refresh/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    });
+
+                    const data = await refreshResponse.json();
+                    await SecureStore.setItemAsync('accessToken', data.access.toString());
+
+                } catch (error) {
+                    Alert.alert('Error', "Session Expired please Login again", [{ text: 'OK', onPress: () => handleLogout() }]);
+                    return;
+                }
+
             }
 
             const response = await fetch(baseUrl + `todos/${id}`, {
@@ -193,7 +245,6 @@ const TodoListScreen = ({ navigation }) => {
     };
 
     const toggleDone = async (inputTodo) => {
-        console.log(inputTodo.done)
         try {
             const updatedTodos = todos.map((todo) =>
                 todo.id === inputTodo.id ? { ...todo, done: !todo.done } : todo
